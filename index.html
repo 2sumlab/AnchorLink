@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>AnchorLink</title>
+</head>
+<style type="text/css">
+    #contain {
+        height: 500px;
+        width: 500px;
+        background: #f3f3f2;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    #img-contain {
+        width: 300x;
+        width: 300px;
+        margin: 0 auto;
+    }
+
+    #main-img {
+        position: relative;
+        height: 300px;
+        left: -25px;
+    }
+
+    #banner-info {
+        font-family: 'Microsoft YaHei', SimHei;
+        text-align: center;
+        position: relative;
+        top: -50px;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: .1em;
+    }
+
+    #github-icon {
+        width: 13px;
+        height: auto;
+    }
+
+    #footer {
+        text-align: center;
+        position: relative;
+        bottom: -45px;
+    }
+
+    a {
+        font-family: 'Microsoft YaHei', SimHei!important;
+        color: #aaaaaa !important;
+        font-size: 12px;
+    }
+
+    a,
+    a:link,
+    a:visited,
+    a:hover,
+    a:active {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    span {
+        font-family: 'Microsoft YaHei', SimHei!important;
+        color: #aaaaaa !important;
+        font-size: 12px;
+        position: relative;
+        bottom: 1px;
+    }
+</style>
+
+<body>
+    <div id="contain">
+        <div id="img-contain">
+            <img id="main-img" src="./src/notion_folder_banner_image.png">
+        </div>
+        <div id="banner-info">
+            <p>AnchorLink</p>
+            <p>Open your file locally</p>
+        </div>
+        <div id="footer">
+            <img id="github-icon" src="./src/github.png">
+            <span>@2sumlab/AnchorLink</span>
+        </div>
+    </div>
+    <script src="renderer.js"></script>
+</body>
+
+</html>
