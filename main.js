@@ -80,13 +80,14 @@ server.get('/open-or-create', (req, res) => {
 server.get('/obsidian-open-or-create', (req, res) => {
   const file = req.query.file;
   if (!file) { res.render('no_path'); return; }
-  const { obsidianVaultPath } = loadSettings();
+  const { obsidianVaultPath, obsidianSubfolder } = loadSettings();
   if (!obsidianVaultPath) { res.render('no_path'); return; }
   const vaultName = path.basename(obsidianVaultPath);
-  const fullPath = path.join(obsidianVaultPath, file);
+  const obsidianFile = obsidianSubfolder ? path.join(obsidianSubfolder, file) : file;
+  const fullPath = path.join(obsidianVaultPath, obsidianFile);
   const exists = fs.existsSync(fullPath);
   const action = exists ? 'open' : 'new';
-  const url = `obsidian://${action}?vault=${encodeURIComponent(vaultName)}&file=${encodeURIComponent(file)}`;
+  const url = `obsidian://${action}?vault=${encodeURIComponent(vaultName)}&file=${encodeURIComponent(obsidianFile)}`;
   shell.openExternal(url).then(() => {
     res.render('redirect_success', { url });
   }).catch(() => {
@@ -112,7 +113,7 @@ let isQuitting = false;
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 540,
-    height: 600,
+    height: 680,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,

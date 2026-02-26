@@ -1,14 +1,17 @@
 const rootDirInput = document.getElementById('rootDir');
 const notionLink = document.getElementById('notionLink');
 const obsidianVaultPathInput = document.getElementById('obsidianVaultPath');
+const obsidianSubfolderInput = document.getElementById('obsidianSubfolder');
 const browseBtn = document.getElementById('browse');
 const browseVaultBtn = document.getElementById('browseVault');
 const saveRootBtn = document.getElementById('saveRoot');
 const saveVaultBtn = document.getElementById('saveVault');
+const saveSubfolderBtn = document.getElementById('saveSubfolder');
 
 window.anchorlink.getSettings().then(settings => {
   rootDirInput.value = settings.rootDir || '';
   obsidianVaultPathInput.value = settings.obsidianVaultPath || '';
+  obsidianSubfolderInput.value = settings.obsidianSubfolder || '';
 });
 
 browseBtn.addEventListener('click', async () => {
@@ -52,4 +55,13 @@ saveVaultBtn.addEventListener('click', async () => {
     obsidianVaultPath: obsidianVaultPathInput.value.trim(),
   });
   showSaved(saveVaultBtn);
+});
+
+saveSubfolderBtn.addEventListener('click', async () => {
+  const current = await window.anchorlink.getSettings();
+  await window.anchorlink.saveSettings({
+    ...current,
+    obsidianSubfolder: obsidianSubfolderInput.value.trim(),
+  });
+  showSaved(saveSubfolderBtn);
 });
