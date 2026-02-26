@@ -63,4 +63,4 @@ npm run make
 
 **二加实验室** · [2sumlab.notion.site](https://2sumlab.notion.site/)
 
-Licensed under [CC0-1.0](./LICENSE.md)
+Licensed under the [MIT License](./LICENSE.md)
