@@ -61,7 +61,7 @@ saveSubfolderBtn.addEventListener('click', async () => {
   const current = await window.anchorlink.getSettings();
   await window.anchorlink.saveSettings({
     ...current,
-    obsidianSubfolder: obsidianSubfolderInput.value.trim(),
+    obsidianSubfolder: obsidianSubfolderInput.value.trim().replace(/^\/+|\/+$/g, ''),
   });
   showSaved(saveSubfolderBtn);
 });

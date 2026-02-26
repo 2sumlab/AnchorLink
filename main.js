@@ -83,7 +83,8 @@ server.get('/obsidian-open-or-create', (req, res) => {
   const { obsidianVaultPath, obsidianSubfolder } = loadSettings();
   if (!obsidianVaultPath) { res.render('no_path'); return; }
   const vaultName = path.basename(obsidianVaultPath);
-  const obsidianFile = obsidianSubfolder ? path.join(obsidianSubfolder, file) : file;
+  const cleanSubfolder = (obsidianSubfolder || '').replace(/^\/+|\/+$/g, '');
+  const obsidianFile = cleanSubfolder ? path.join(cleanSubfolder, file) : file;
   const fullPath = path.join(obsidianVaultPath, obsidianFile);
   const exists = fs.existsSync(fullPath);
   const action = exists ? 'open' : 'new';
