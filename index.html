@@ -1,91 +1,278 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>AnchorLink</title>
+  <meta charset="UTF-8">
+  <title>AnchorLink</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 13px;
+      background: #f2f2f7;
+      color: #1d1d1f;
+      padding: 22px 28px 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .app-header-left {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .app-header img {
+      width: 32px;
+      height: 32px;
+    }
+
+    h1 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .server-badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: #6e6e73;
+      background: rgba(0,0,0,0.06);
+      border-radius: 20px;
+      padding: 3px 9px 3px 7px;
+    }
+
+    .server-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #34c759;
+      flex-shrink: 0;
+    }
+
+    /* ── Settings Card ── */
+    .settings-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.09);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+
+    .field-divider {
+      height: 1px;
+      background: rgba(0,0,0,0.07);
+      margin: 12px 0;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: #1d1d1f;
+      margin-bottom: 6px;
+    }
+
+    .field-row {
+      display: flex;
+      gap: 7px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      height: 30px;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 7px;
+      padding: 0 10px;
+      font-size: 13px;
+      background: rgba(0,0,0,0.03);
+      color: #1d1d1f;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #0071e3;
+      box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.18);
+      background: #fff;
+    }
+
+    input[type="text"]::placeholder {
+      color: #c7c7cc;
+    }
+
+    button {
+      height: 30px;
+      padding: 0 13px;
+      border-radius: 7px;
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid rgba(0,0,0,0.14);
+      background: #fff;
+      color: #1d1d1f;
+      white-space: nowrap;
+      transition: background 0.1s;
+    }
+
+    button:hover  { background: #f5f5f7; }
+    button:active { background: #ebebf0; }
+
+    button.primary {
+      background: #0071e3;
+      border-color: transparent;
+      color: #fff;
+    }
+
+    button.primary:hover  { background: #0077ed; }
+    button.primary:active { background: #006ad0; }
+
+    /* ── URL Reference ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #8e8e93;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .hint {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.09);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .url-item {
+      padding: 9px 14px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .url-item:last-child {
+      border-bottom: none;
+    }
+
+    .url-op {
+      font-size: 11px;
+      color: #8e8e93;
+      margin-bottom: 4px;
+    }
+
+    code {
+      font-family: 'SF Mono', Monaco, Menlo, monospace;
+      font-size: 10.5px;
+      background: #f2f2f7;
+      padding: 3px 8px;
+      border-radius: 5px;
+      color: #3a3a3c;
+      display: block;
+      word-break: break-all;
+    }
+
+    .saved {
+      background: #34c759 !important;
+      border-color: transparent !important;
+      color: #fff !important;
+    }
+
+    /* ── Footer ── */
+    .app-footer {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #8e8e93;
+    }
+
+    .app-footer a {
+      color: #8e8e93;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .app-footer a:hover {
+      color: #0071e3;
+      text-decoration: underline;
+    }
+
+    .footer-dot {
+      font-size: 9px;
+      opacity: 0.5;
+    }
+  </style>
 </head>
-<style type="text/css">
-    #contain {
-        height: 500px;
-        width: 500px;
-        background: #f3f3f2;
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    #img-contain {
-        width: 300x;
-        width: 300px;
-        margin: 0 auto;
-    }
-
-    #main-img {
-        position: relative;
-        height: 300px;
-        left: -25px;
-    }
-
-    #banner-info {
-        font-family: 'Microsoft YaHei', SimHei;
-        text-align: center;
-        position: relative;
-        top: -50px;
-        font-size: 20px;
-        font-weight: bold;
-        line-height: .1em;
-    }
-
-    #github-icon {
-        width: 13px;
-        height: auto;
-    }
-
-    #footer {
-        text-align: center;
-        position: relative;
-        bottom: -45px;
-    }
-
-    a {
-        font-family: 'Microsoft YaHei', SimHei!important;
-        color: #aaaaaa !important;
-        font-size: 12px;
-    }
-
-    a,
-    a:link,
-    a:visited,
-    a:hover,
-    a:active {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    span {
-        font-family: 'Microsoft YaHei', SimHei!important;
-        color: #aaaaaa !important;
-        font-size: 12px;
-        position: relative;
-        bottom: 1px;
-    }
-</style>
-
 <body>
-    <div id="contain">
-        <div id="img-contain">
-            <img id="main-img" src="./src/notion_folder_banner_image.png">
-        </div>
-        <div id="banner-info">
-            <p>AnchorLink</p>
-            <p>Open your file locally</p>
-        </div>
-        <div id="footer">
-            <img id="github-icon" src="./src/github.png">
-            <span>@2sumlab/AnchorLink</span>
-        </div>
+  <div class="app-header">
+    <div class="app-header-left">
+      <img src="icons/AppIcon.iconset/icon_128x128.png" alt="AnchorLink">
+      <h1>AnchorLink</h1>
     </div>
-    <script src="renderer.js"></script>
-</body>
+    <div class="server-badge">
+      <span class="server-dot"></span>
+      <span>localhost:19283</span>
+    </div>
+  </div>
 
+  <div class="settings-card">
+    <div class="field-group">
+      <label>根目录</label>
+      <div class="field-row">
+        <input type="text" id="rootDir" placeholder="/Users/dan/Notes" />
+        <button id="browse">选择</button>
+        <button class="primary" id="saveRoot">保存</button>
+      </div>
+    </div>
+
+    <div class="field-divider"></div>
+
+    <div class="field-group">
+      <label>Obsidian Vault</label>
+      <div class="field-row">
+        <input type="text" id="obsidianVaultPath" placeholder="/Users/dan/Documents/MyVault" />
+        <button id="browseVault">选择</button>
+        <button class="primary" id="saveVault">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">URL 用法示例</div>
+  <div class="hint">
+    <div class="url-item">
+      <div class="url-op">打开文件</div>
+      <code>http://localhost:19283/open-file?path=notes/todo.md</code>
+    </div>
+    <div class="url-item">
+      <div class="url-op">文件不存在则新建</div>
+      <code>http://localhost:19283/open-or-create?path=notes/todo.md</code>
+    </div>
+    <div class="url-item">
+      <div class="url-op">文件夹不存在则新建</div>
+      <code>http://localhost:19283/open-or-create?path=projects&type=folder</code>
+    </div>
+    <div class="url-item">
+      <div class="url-op">Obsidian — 存在则打开，否则新建</div>
+      <code>http://localhost:19283/obsidian-open-or-create?file=Notes/todo.md</code>
+    </div>
+  </div>
+
+  <div class="app-footer">
+    <span>二加实验室</span>
+    <span class="footer-dot">·</span>
+    <a id="notionLink" href="#">2sumlab.notion.site</a>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
 </html>
