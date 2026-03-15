@@ -51,7 +51,24 @@ server.get('/open-or-create', (req, res) => {
 
   if (!filePath) { res.render('no_path'); return; }
 
-  const exists = fs.existsSync(filePath);
+  let exists = fs.existsSync(filePath);
+
+  // If path exists but as the wrong type, fix it
+  if (exists) {
+    const stat = fs.statSync(filePath);
+    const isDir = stat.isDirectory();
+    if (isFolder && !isDir) {
+      // Path exists as a file but we want a folder: remove file and create folder
+      try {
+        fs.unlinkSync(filePath);
+        exists = false;
+      } catch (err) {
+        res.render('open_fail', { open_file_path: filePath });
+        return;
+      }
+    }
+  }
+
   if (!exists) {
     try {
       if (isFolder) {
